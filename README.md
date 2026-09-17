@@ -150,15 +150,43 @@ Formato fijo por pregunta: **pregunta → método → hallazgo → insight**.
   164k USD son el precio por redención/engagement; un ROI real requeriría
   análisis causal (fuera de alcance).
 
+## Etapa 4 — Export a Tableau
+
+Se explotó `offers.channels` a formato largo (`data/processed/offers_long.csv`,
+33 filas oferta × canal) y se generaron 8 exports pre-agregados en
+`data/export/` para armar el dashboard **a mano** en Tableau (las tasas ya
+vienen calculadas y validadas).
+
+| Archivo | Qué alimenta | Pregunta |
+|---|---|---|
+| `funnel_overall.csv` | `stage`, `count`, `pct_of_received` | Q1–Q2 |
+| `funnel_by_type.csv` | received/viewed/completed + tasas por tipo | Q3 |
+| `funnel_by_channel.csv` | tasas por canal (atribución asociativa) | Q4 |
+| `time_to_event.csv` | `n`, `mean_h`, `median_h` por tipo y métrica | Q5 |
+| `spend_by_context.csv` | `n`, `avg_amount_usd`, `total_usd` por contexto | Q6 |
+| `completion_by_segment.csv` | completion rate por `dimension` y `segment` | Q7 |
+| `cohort_comparison.csv` | funnel y gasto por cohorte (con/sin demo) | Q8 |
+| `reward_value.csv` | recompensas pagadas por tipo | Q9 |
+
+`tableau/charts.md` es la cartografía de los **8 gráficos** (en 3 secciones),
+cada uno con su archivo de datos, dimensión/medida, título y mensaje. Los
+exports se regeneran con `python3 notebooks/04_tableau_export.py` (detalles en
+`data/export/README.md`).
+
+**Diagnóstico — cohorte sin demografía:** sus 2.175 clientes tienen fechas de
+alta distribuidas (2013–2018, 950 fechas únicas), pero comportamiento anómalo
+(mediana de ticket 1,71 USD, completion 11,6%). Se **excluye** del análisis
+demográfico y se muestra como cohorte aparte.
+
 ## Cómo reproducir
 
 - **SQL (Q1–Q4):** queries en `sql/` (ver `sql/README.md`), contra
   `sql/coffee_rewards.db` (SQLite, extensión JSON1).
 - **Pandas (Q5–Q9):** análisis en `notebooks/03_business_questions.ipynb`.
+- **Export a Tableau:** `notebooks/04_tableau_export.py` (ver
+  `data/export/README.md`).
 
 ## Próximos pasos
 
-- Exportar resultados a Tableau y armar gráficos/dashboard a mano.
-- Explorar un explode definitivo de `channels` para tablas de canales por oferta.
-- Profundizar en la cohorte sin demografía (posible artefacto) antes de
-  descartarla.
+- Armar los 8 gráficos y el dashboard en Tableau a mano, siguiendo
+  `tableau/charts.md` y usando los exports de `data/export/`.

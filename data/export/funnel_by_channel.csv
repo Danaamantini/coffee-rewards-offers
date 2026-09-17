@@ -1,0 +1,5 @@
+channel,n_offers,received,viewed,completed,view_rate_pct,completion_rate_pct
+web,8,61001,44322,29891,72.66,49.0
+social,6,45683,42629,21788,93.31,47.69
+email,10,76277,57725,33579,75.68,44.02
+mobile,9,68609,55062,30159,80.25,43.96
