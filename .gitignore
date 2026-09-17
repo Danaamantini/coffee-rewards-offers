@@ -14,3 +14,6 @@ second-brain/
 memory/
 INSIGHTS.md
 PROCESS.md
+
+# SQLite (se regenera desde data/processed/, ver sql/README.md)
+sql/*.db
