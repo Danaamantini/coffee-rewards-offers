@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Capa de agentes / orquestación (no se versiona en el repo público)
+.opencode/
+opencode.json
+openspec/
+second-brain/
+memory/
+INSIGHTS.md
+PROCESS.md
