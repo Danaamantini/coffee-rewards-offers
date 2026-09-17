@@ -1,7 +1,7 @@
 # data/export/ — Coffee Rewards
 
 Tablas pre-agregadas (formato tidy) generadas en la Etapa 4 para alimentar el
-dashboard de Tableau. No son datos crudos: son los resultados de la Etapa 3 ya
+dashboard de Power BI. No son datos crudos: son los resultados de la Etapa 3 ya
 calculados y validados (ver `openspec/specs/business-questions/`).
 
 ## Regenerar

@@ -12,7 +12,7 @@ canales, tiempo de reacción, gasto y demografía.
 - **Excel** — apoyo y verificación de resultados.
 
 Fuera de alcance: machine learning, modelado predictivo y dashboards/gráficos
-finales generados por código (se hacen a mano en Tableau).
+finales generados por código (se hacen a mano en Power BI).
 
 ## Estructura del repo
 
@@ -150,11 +150,11 @@ Formato fijo por pregunta: **pregunta → método → hallazgo → insight**.
   164k USD son el precio por redención/engagement; un ROI real requeriría
   análisis causal (fuera de alcance).
 
-## Etapa 4 — Export a Tableau
+## Etapa 4 — Export a dashboard (Power BI)
 
 Se explotó `offers.channels` a formato largo (`data/processed/offers_long.csv`,
 33 filas oferta × canal) y se generaron 8 exports pre-agregados en
-`data/export/` para armar el dashboard **a mano** en Tableau (las tasas ya
+`data/export/` para armar el dashboard **a mano** en Power BI (las tasas ya
 vienen calculadas y validadas).
 
 | Archivo | Qué alimenta | Pregunta |
@@ -168,7 +168,7 @@ vienen calculadas y validadas).
 | `cohort_comparison.csv` | funnel y gasto por cohorte (con/sin demo) | Q8 |
 | `reward_value.csv` | recompensas pagadas por tipo | Q9 |
 
-`tableau/charts.md` es la cartografía de los **8 gráficos** (en 3 secciones),
+`dashboard/charts.md` es la cartografía de los **8 gráficos** (en 3 secciones),
 cada uno con su archivo de datos, dimensión/medida, título y mensaje. Los
 exports se regeneran con `python3 notebooks/04_tableau_export.py` (detalles en
 `data/export/README.md`).
@@ -183,10 +183,10 @@ demográfico y se muestra como cohorte aparte.
 - **SQL (Q1–Q4):** queries en `sql/` (ver `sql/README.md`), contra
   `sql/coffee_rewards.db` (SQLite, extensión JSON1).
 - **Pandas (Q5–Q9):** análisis en `notebooks/03_business_questions.ipynb`.
-- **Export a Tableau:** `notebooks/04_tableau_export.py` (ver
+- **Export a dashboard:** `notebooks/04_tableau_export.py` (ver
   `data/export/README.md`).
 
 ## Próximos pasos
 
-- Armar los 8 gráficos y el dashboard en Tableau a mano, siguiendo
-  `tableau/charts.md` y usando los exports de `data/export/`.
+- Armar los 8 gráficos y el dashboard en Power BI a mano, siguiendo
+  `dashboard/charts.md` y usando los exports de `data/export/`.
