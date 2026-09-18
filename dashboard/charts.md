@@ -138,6 +138,18 @@ columns ending in `_pct`, `_usd`, or `_h` as values.
 - **Mensaje:** discount presenta una relación ventas/recompensa estimada de 3,55
   y margen de equilibrio de 28,1%; BOGO, 1,26 y 79,3%, respectivamente.
 
+### 3.6 Sensibilidad al margen bruto
+
+- **Visual:** Gráfico de líneas con línea constante en cero.
+- **Datos:** `margin_sensitivity.csv`.
+- **Eje X:** `gross_margin_pct`; **Leyenda:** `offer_type`; **Eje Y:**
+  `modeled_net_contribution_usd`.
+- **Título:** Modeled Net Contribution by Gross Margin.
+- **Mensaje:** discount cubre el costo estimado de recompensas cerca de un margen
+  de 28%; BOGO requiere aproximadamente 79%.
+- **Nota visible:** es un escenario basado en incrementalidad observacional, no
+  una medición de beneficio realizado.
+
 ## Workflow: Desktop → Service
 
 1. **Construí** el dashboard en **Power BI Desktop** (gratis).

@@ -108,6 +108,11 @@ $3.72), and has a substantially lower modeled break-even margin. These results
 are not a causal ROI claim because actual product margin and randomized
 treatment assignment are unavailable.
 
+Because actual gross margin is absent, the project also includes a scenario
+analysis from 20% to 80%. Under the modeled incremental sales estimate,
+discount becomes contribution-positive between 20% and 30% gross margin, while
+BOGO does not cover its stated reward cost until approximately 79%.
+
 ## Analytical workflow
 
 1. **Understand the source data** and validate schemas, event types, and nulls.

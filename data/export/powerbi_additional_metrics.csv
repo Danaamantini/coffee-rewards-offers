@@ -24,3 +24,15 @@ incrementality_model,offer_type,bogo,sales_per_reward_usd,1.26
 incrementality_model,offer_type,discount,sales_per_reward_usd,3.55
 incrementality_model,offer_type,bogo,break_even_margin_pct,79.28
 incrementality_model,offer_type,discount,break_even_margin_pct,28.14
+margin_sensitivity,gross_margin_pct,20%,bogo_net_contribution_usd,-84822.94
+margin_sensitivity,gross_margin_pct,30%,bogo_net_contribution_usd,-70514.41
+margin_sensitivity,gross_margin_pct,40%,bogo_net_contribution_usd,-56205.88
+margin_sensitivity,gross_margin_pct,50%,bogo_net_contribution_usd,-41897.35
+margin_sensitivity,gross_margin_pct,60%,bogo_net_contribution_usd,-27588.81
+margin_sensitivity,gross_margin_pct,80%,bogo_net_contribution_usd,1028.25
+margin_sensitivity,gross_margin_pct,20%,discount_net_contribution_usd,-14824.71
+margin_sensitivity,gross_margin_pct,30%,discount_net_contribution_usd,3380.94
+margin_sensitivity,gross_margin_pct,40%,discount_net_contribution_usd,21586.59
+margin_sensitivity,gross_margin_pct,50%,discount_net_contribution_usd,39792.24
+margin_sensitivity,gross_margin_pct,60%,discount_net_contribution_usd,57997.88
+margin_sensitivity,gross_margin_pct,80%,discount_net_contribution_usd,94409.18

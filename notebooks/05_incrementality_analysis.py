@@ -340,7 +340,9 @@ def export_isolated_pre_post(customer_ids, spend, tx_count, journeys):
     return output
 
 
-def export_powerbi_long(response_timing, reward_efficiency, fixed_effects):
+def export_powerbi_long(
+    response_timing, reward_efficiency, fixed_effects, margin_sensitivity
+):
     """Export the new metrics in the report's generic five-column schema."""
     timing = response_timing[
         response_timing["offer_type"].isin(["bogo", "discount", "informational"])
@@ -381,9 +383,45 @@ def export_powerbi_long(response_timing, reward_efficiency, fixed_effects):
     modeled["dataset"] = "incrementality_model"
     modeled["dimension"] = "offer_type"
 
-    output = pd.concat([timing, reward, modeled], ignore_index=True)
+    margin = margin_sensitivity.copy()
+    margin["category"] = margin["gross_margin_pct"].astype(str) + "%"
+    margin["measure"] = margin["offer_type"] + "_net_contribution_usd"
+    margin = margin.rename(columns={"modeled_net_contribution_usd": "value"})
+    margin["dataset"] = "margin_sensitivity"
+    margin["dimension"] = "gross_margin_pct"
+
+    output = pd.concat([timing, reward, modeled, margin], ignore_index=True)
     output = output[["dataset", "dimension", "category", "measure", "value"]]
     output.to_csv(EXPORT / "powerbi_additional_metrics.csv", index=False)
+    return output
+
+
+def export_margin_sensitivity(fixed_effects):
+    """Show modeled net contribution across plausible gross-margin scenarios."""
+    rows = []
+    for row in fixed_effects[
+        fixed_effects["offer_type"].isin(["bogo", "discount"])
+    ].itertuples():
+        for gross_margin_pct in [20, 30, 40, 50, 60, 80]:
+            gross_profit = (
+                row.vs_informational_incremental_sales_usd
+                * gross_margin_pct
+                / 100
+            )
+            net_contribution = gross_profit - row.total_reward_usd
+            rows.append(
+                {
+                    "offer_type": row.offer_type,
+                    "gross_margin_pct": gross_margin_pct,
+                    "modeled_incremental_sales_usd": row.vs_informational_incremental_sales_usd,
+                    "modeled_incremental_gross_profit_usd": round(gross_profit, 2),
+                    "total_reward_usd": row.total_reward_usd,
+                    "modeled_net_contribution_usd": round(net_contribution, 2),
+                    "covers_reward_cost": net_contribution >= 0,
+                }
+            )
+    output = pd.DataFrame(rows)
+    output.to_csv(EXPORT / "margin_sensitivity.csv", index=False)
     return output
 
 
@@ -395,7 +433,10 @@ fixed_effects = export_fixed_effects_incrementality(
     spend, tx_count, exposures, reward_efficiency
 )
 pre_post = export_isolated_pre_post(customer_ids, spend, tx_count, journeys)
-powerbi_long = export_powerbi_long(response_timing, reward_efficiency, fixed_effects)
+margin_sensitivity = export_margin_sensitivity(fixed_effects)
+powerbi_long = export_powerbi_long(
+    response_timing, reward_efficiency, fixed_effects, margin_sensitivity
+)
 
 print("\nResponse timing")
 print(response_timing.to_string(index=False))
@@ -407,4 +448,6 @@ print("\nIsolated pre/post robustness check")
 print(pre_post.to_string(index=False))
 print("\nPower BI additional metrics")
 print(powerbi_long.to_string(index=False))
+print("\nGross-margin sensitivity")
+print(margin_sensitivity.to_string(index=False))
 print("\nExports generated in data/export/.")

@@ -27,6 +27,7 @@ python3 notebooks/05_incrementality_analysis.py
 | `reward_efficiency.csv` | completions, costo y participación por tipo de oferta | Q9 ampliada |
 | `incrementality_fixed_effects.csv` | estimación within-customer con controles de tiempo | Incrementalidad |
 | `incrementality_pre_post.csv` | robustez pre/post con ventanas sin ofertas superpuestas | Incrementalidad |
+| `margin_sensitivity.csv` | contribución neta estimada bajo distintos márgenes brutos | Escenarios |
 | `powerbi_additional_metrics.csv` | métricas nuevas en el esquema largo del reporte | Power BI |
 
 ## Convenciones
