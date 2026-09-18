@@ -7,7 +7,7 @@ calculados y validados (ver `openspec/specs/business-questions/`).
 ## Regenerar
 
 ```sh
-python3 notebooks/04_tableau_export.py
+python3 notebooks/04_powerbi_export.py
 ```
 
 ## Archivos

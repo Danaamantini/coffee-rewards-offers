@@ -30,22 +30,11 @@ Cada gráfico se alimenta de **un archivo pre-agregado** en `data/export/`.
 | `cohort_comparison.csv` | Cohortes con/sin demografía (Q8) |
 | `reward_value.csv` | Valor económico (Q9) |
 
-## Equivalencia Tableau → Power BI
+## Power BI field mapping
 
-Para referencia si venís de Tableau:
-
-| Tableau | Power BI |
-|---|---|
-| Dimensión | Campo / Eje / Categoría |
-| Medida | Valor / Valores |
-| Filtro | Filtro (similar) |
-| Trellis / Small multiples | **Small multiples** (en formato del visual) |
-| Funnel | **Funnel** (visual nativo) |
-| Donut | **Donut** (visual nativo) |
-| Barra horizontal | Gráfico de barras (orientación: horizontal) |
-| Barra agrupada | Gráfico de barras agrupadas |
-| Línea de referencia | Línea de referencia (Insertar → Línea de referencia) |
-| Calcular campo | No necesario (datos pre-agregados) |
+The exported tables are already aggregated, so the report does not require DAX
+measures. Use the categorical columns for axes and slicers, and the numeric
+columns ending in `_pct`, `_usd`, or `_h` as values.
 
 ## Estructura del dashboard
 

@@ -1,9 +1,9 @@
-"""Coffee Rewards — Etapa 4: export a Tableau.
+"""Coffee Rewards - Stage 4: export Power BI-ready datasets.
 
 Genera de forma reproducible:
   1. Diagnóstico de la cohorte sin demografía.
   2. `data/processed/offers_long.csv` (explode definitivo de `channels`).
-  3. Tablas pre-agregadas en `data/export/` listas para graficar en Tableau.
+  3. Pre-aggregated tables in `data/export/` ready for Power BI.
 
 No modifica `data/raw/`. Los números se recalculan desde `data/processed/` y
 deben coincidir con los hallazgos de la Etapa 3 (spec business-questions).
