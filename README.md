@@ -34,8 +34,13 @@ The project answers nine business questions across four themes:
 - Customers with missing demographics behave like a distinct anomalous cohort:
   they view offers frequently but complete only 11.6% and have a much lower
   average transaction value.
-- Viewed offers are associated with only a **$0.12 increase in average ticket**;
-  this descriptive result does not establish causal lift.
+- A receipt-level journey analysis finds a median **12 hours to view** and
+  **48 hours to complete** an offer.
+- Discount offers account for **53.3% of completions but only 31.1% of reward
+  cost**; BOGO accounts for 46.7% of completions and 68.9% of cost.
+- A customer-and-time fixed-effects model estimates **$3.55 in sales per $1 of
+  discount reward**, versus $1.26 for BOGO, after using informational offers as
+  a behavioral benchmark. This is directional evidence, not causal ROI.
 
 ## Dashboard walkthrough
 
@@ -69,11 +74,39 @@ customer effectiveness analysis, and an interactive data-exploration page.
 | 2 | What share of received offers are completed? | 33,579 offers were completed: **44.02%** of received offers. |
 | 3 | Which offer type converts best? | **Discount** leads completion at 58.64%; BOGO leads views at 83.44%. |
 | 4 | Which channel performs best? | **Social** leads view rate at 93.31%; **web** leads completion at 49.00%. |
-| 5 | How quickly do customers respond? | Median time to view is 18 hours; median time to complete is 54 hours. |
-| 6 | Do viewed offers increase basket size? | Average ticket changes from $12.76 without an active offer to $12.88 after a viewed offer. |
+| 5 | How quickly do customers respond? | Median time to view is **12 hours** and median time to complete is **48 hours** after matching events to individual receipt instances. |
+| 6 | Do offers appear to increase spending and purchase frequency? | The fixed-effects estimate is +$1.56–$1.57 in daily spend and +0.12–0.14 daily transactions while an incentive is active; informational offers also show positive movement, so the result is not interpreted as causal lift. |
 | 7 | Which demographic segments complete more offers? | Completion rises with age and income; women complete 56.4% versus 43.2% for men. |
 | 8 | Does missing demographic data identify a different cohort? | Yes. The no-demographics cohort has 11.6% completion and a $2.70 average ticket. |
-| 9 | What is the economic value of issued rewards? | Completed offers generated **$164,676** in rewards; BOGO represents 69% of that cost. |
+| 9 | How efficient is reward spending by offer type? | Completed offers incurred **$164,676 in stated reward value**. BOGO represents 68.9% of that cost but 46.7% of completions; discount represents 31.1% of cost and 53.3% of completions. |
+
+## Incrementality and reward economics
+
+The descriptive ticket comparison alone is not sufficient to estimate ROI.
+Customers who view offers may already be more engaged, multiple offers can be
+active at once, and the dataset does not identify a randomized control group.
+
+To reduce those biases, the extended analysis uses two complementary checks:
+
+1. A balanced six-hour customer panel compares each customer with themselves
+   and controls for common time-period effects.
+2. An isolated pre/post comparison retains only receipt windows without another
+   overlapping offer and compares each active period with an equally long prior
+   period.
+
+The fixed-effects model produces the following directional estimates after
+subtracting the informational-offer coefficient as a behavioral benchmark:
+
+| Offer type | Estimated daily spend change | Estimated daily transaction change | Modeled sales per $1 reward | Break-even contribution margin |
+|---|---:|---:|---:|---:|
+| BOGO | +$0.82 | +0.064 | $1.26 | 79.3% |
+| Discount | +$0.84 | +0.049 | $3.55 | 28.1% |
+
+Discount is therefore the more economically plausible incentive in this
+dataset: it converts more often, costs less per received offer ($1.68 versus
+$3.72), and has a substantially lower modeled break-even margin. These results
+are not a causal ROI claim because actual product margin and randomized
+treatment assignment are unavailable.
 
 ## Analytical workflow
 
@@ -100,7 +133,8 @@ coffee-rewards-offers/
 │   ├── 01_data_understanding.ipynb
 │   ├── 02_data_cleaning.ipynb
 │   ├── 03_business_questions.ipynb
-│   └── 04_powerbi_export.py
+│   ├── 04_powerbi_export.py
+│   └── 05_incrementality_analysis.py
 ├── sql/                         # Funnel and channel SQL queries
 ├── requirements.txt
 └── README.md
@@ -121,6 +155,7 @@ jupyter notebook notebooks/03_business_questions.ipynb
 
 # Regenerate the Power BI-ready datasets
 python3 notebooks/04_powerbi_export.py
+python3 notebooks/05_incrementality_analysis.py
 ```
 
 The generated files are written to `data/export/`. Import them into Power BI
@@ -141,7 +176,13 @@ using the visual mapping documented in [`dashboard/charts.md`](dashboard/charts.
 - Customers without demographic information are excluded from demographic
   segment comparisons and analyzed as a separate cohort.
 - Spending comparisons are observational and should not be interpreted as
-  causal uplift. A controlled experiment would be required for ROI estimation.
+  causal uplift. The fixed-effects and isolated pre/post estimates reduce some
+  observable bias but do not replace a randomized control group.
+- The dataset does not contain product gross margin. Break-even margin is shown
+  as the minimum contribution margin required for modeled incremental sales to
+  cover the stated reward value; it is not realized profit.
+- Informational offers are used only as a behavioral benchmark, not as a true
+  experimental control group.
 
 ## Data source
 

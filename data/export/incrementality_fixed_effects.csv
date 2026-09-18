@@ -1,0 +1,4 @@
+offer_type,active_customer_periods_6h,estimated_spend_change_per_day_usd,estimated_tx_change_per_day,estimated_incremental_sales_usd,vs_informational_spend_change_per_day_usd,vs_informational_tx_change_per_day,vs_informational_incremental_sales_usd,total_reward_usd,sales_per_reward_usd,break_even_margin_pct
+bogo,695002,1.56,0.135,270512.5,0.82,0.064,143085.31,113440.0,1.26,79.28
+discount,866500,1.57,0.12,340927.46,0.84,0.049,182056.47,51236.0,3.55,28.14
+informational,225995,0.73,0.071,41435.72,0.0,0.0,0.0,0.0,,

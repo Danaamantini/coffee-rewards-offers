@@ -1,6 +1,6 @@
 offer_type,metric,n,mean_h,median_h
-bogo,time_to_view,21546,29.4,12.0
-bogo,time_to_complete,13587,65.9,42.0
-discount,time_to_view,18280,32.6,18.0
-discount,time_to_complete,15409,85.7,66.0
-informational,time_to_view,9309,38.6,18.0
+bogo,time_to_view,25250,23.8,12.0
+bogo,time_to_complete,15501,49.6,42.0
+discount,time_to_view,21370,25.8,12.0
+discount,time_to_complete,17600,71.4,60.0
+informational,time_to_view,9947,22.6,18.0

@@ -1,0 +1,4 @@
+offer_type,n_isolated_receipts,avg_duration_days,avg_pre_spend_usd,avg_active_spend_usd,avg_spend_change_usd,avg_spend_change_per_day_usd,avg_pre_tx,avg_active_tx,avg_tx_change_per_day,avg_reward_cost_per_receipt_usd
+bogo,1882,5.97,10.19,24.76,14.57,2.58,0.8,1.96,0.2,3.73
+discount,916,7.1,9.97,28.81,18.83,2.64,0.86,2.24,0.19,1.54
+informational,2286,3.34,6.24,11.95,5.71,1.79,0.47,0.93,0.15,0.0

@@ -132,15 +132,44 @@ fbc.to_csv("data/export/funnel_by_channel.csv", index=False)
 print("\nfunnel_by_channel.csv"); print(fbc.to_string(index=False))
 
 # ---- time_to_event (Q5) ----
-rec5 = events[events["event"] == REC].groupby(["customer_id", "offer_id"])["time"].min().rename("rec_time")
-view5 = events[events["event"] == VIEW].groupby(["customer_id", "offer_id"])["time"].min().rename("view_time")
-comp5 = events[events["event"] == COMP].groupby(["customer_id", "offer_id"])["time"].min().rename("comp_time")
-pairs = rec5.to_frame().join(view5, how="outer").join(comp5, how="outer").reset_index()
-pairs = pairs.merge(offers[["offer_id", "offer_type"]], on="offer_id")
-pairs["time_to_view"] = np.where(pairs["view_time"] >= pairs["rec_time"],
-                                 pairs["view_time"] - pairs["rec_time"], np.nan)
-pairs["time_to_complete"] = np.where(pairs["comp_time"] >= pairs["rec_time"],
-                                     pairs["comp_time"] - pairs["rec_time"], np.nan)
+# A customer can receive the same offer more than once. Match each view and
+# completion to the latest eligible receipt instance instead of collapsing the
+# entire customer-offer history into one pair.
+receipts5 = (
+    events.loc[events["event"] == REC, ["customer_id", "offer_id", "time"]]
+    .rename(columns={"time": "rec_time"})
+    .reset_index(drop=True)
+)
+receipts5["receipt_id"] = receipts5.index
+receipts5 = receipts5.merge(
+    offers[["offer_id", "offer_type", "duration"]], on="offer_id"
+)
+receipts5["expire_time"] = receipts5["rec_time"] + receipts5["duration"] * 24
+
+response_events = events.loc[
+    events["event"].isin([VIEW, COMP]),
+    ["customer_id", "offer_id", "event", "time"],
+]
+matched_events = pd.merge_asof(
+    response_events.sort_values("time"),
+    receipts5[
+        ["customer_id", "offer_id", "receipt_id", "rec_time", "expire_time"]
+    ].sort_values("rec_time"),
+    left_on="time",
+    right_on="rec_time",
+    by=["customer_id", "offer_id"],
+    direction="backward",
+)
+matched_events = matched_events[matched_events["time"] <= matched_events["expire_time"]]
+first_response = (
+    matched_events.sort_values("time")
+    .drop_duplicates(["receipt_id", "event"])
+    .pivot(index="receipt_id", columns="event", values="time")
+    .reset_index()
+)
+pairs = receipts5.merge(first_response, on="receipt_id", how="left")
+pairs["time_to_view"] = pairs[VIEW] - pairs["rec_time"]
+pairs["time_to_complete"] = pairs[COMP] - pairs["rec_time"]
 tte_rows = []
 for typ, grp in pairs.groupby("offer_type"):
     for metric in ["time_to_view", "time_to_complete"]:

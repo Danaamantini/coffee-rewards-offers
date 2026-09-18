@@ -75,14 +75,15 @@ columns ending in `_pct`, `_usd`, or `_h` as values.
 
 ### 2.2 Tiempo de reacción (Q5)
 
-- **Visual:** Gráfico de barras.
-- **Datos:** `time_to_event.csv`.
-- **Eje:** `offer_type`; **Valores:** `median_h`.
-- **Filtro/segmentación:** duplicar visual o usar `metric` como filtro (view vs
-  complete).
-- **Título:** Tiempo (mediana) para ver y completar por tipo.
-- **Mensaje:** ver ~18 h, completar ~54 h; bogo se completa más rápido (42 h)
-  que discount (66 h).
+- **Visual:** Gráfico de barras agrupadas.
+- **Datos:** `response_timing.csv`.
+- **Filtro:** excluir `offer_type = overall` y `metric = view_to_complete`.
+- **Eje:** `offer_type`; **Leyenda:** `metric`; **Valores:** `median_h`.
+- **Título:** Median Response Time by Offer Type (Hours).
+- **Mensaje:** la mediana global es 12 h para ver y 48 h para completar; BOGO
+  se completa más rápido (42 h) que discount (60 h).
+- **Tooltip recomendado:** `event_rate_pct`, `p75_h` y
+  `within_48h_pct_received`.
 
 ### 3.1 Gasto por contexto de oferta (Q6)
 
@@ -114,12 +115,28 @@ columns ending in `_pct`, `_usd`, or `_h` as values.
 
 ### 3.4 Valor económico por tipo (Q9)
 
-- **Visual:** Donut o gráfico de barras.
-- **Datos:** `reward_value.csv`.
-- **Categoría:** `offer_type`; **Valores:** `total_reward_usd` (donut) o
-  `avg_reward_usd` (barras).
-- **Título:** Recompensas pagadas por tipo de oferta.
-- **Mensaje:** bogo concentra el 69% del costo (113.440 de 164.676 USD).
+- **Visual principal:** Gráfico de columnas agrupadas.
+- **Datos:** `reward_efficiency.csv`.
+- **Eje:** `offer_type`; **Valores:** `completion_share_pct` y
+  `reward_cost_share_pct`.
+- **Título:** Share of Completions vs Reward Cost.
+- **Mensaje:** BOGO genera 46,7% de los completados pero absorbe 68,9% del costo;
+  discount genera 53,3% de los completados con 31,1% del costo.
+- **Visual secundario:** barras con `reward_cost_per_received_usd` ($3,72 BOGO
+  vs $1,68 discount).
+
+### 3.5 Incrementalidad estimada
+
+- **Visual:** Tabla o matriz; no usar una tarjeta que sugiera ROI confirmado.
+- **Datos:** `incrementality_fixed_effects.csv`.
+- **Filas:** `offer_type` (bogo y discount).
+- **Valores:** `vs_informational_spend_change_per_day_usd`,
+  `sales_per_reward_usd`, `break_even_margin_pct`.
+- **Título:** Modeled Offer Economics (Directional).
+- **Nota visible:** "Observational estimate; actual margin and randomized
+  control are unavailable."
+- **Mensaje:** discount presenta una relación ventas/recompensa estimada de 3,55
+  y margen de equilibrio de 28,1%; BOGO, 1,26 y 79,3%, respectivamente.
 
 ## Workflow: Desktop → Service
 

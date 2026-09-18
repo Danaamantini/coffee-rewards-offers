@@ -1,0 +1,4 @@
+offer_type,received,completed,completion_rate_pct,total_reward_usd,avg_reward_per_completion_usd,reward_cost_per_received_usd,completion_share_pct,reward_cost_share_pct
+bogo,30499,15669,51.38,113440.0,7.24,3.72,46.66,68.89
+discount,30543,17910,58.64,51236.0,2.86,1.68,53.34,31.11
+informational,15235,0,0.0,0.0,0.0,0.0,0.0,0.0
