@@ -2,8 +2,8 @@
 
 An end-to-end marketing analytics project that evaluates how rewards members
 receive, view, and complete promotional offers. The analysis combines Python,
-SQL, and Power BI to identify conversion gaps, channel performance, customer
-segments, and opportunities for more effective targeting.
+SQL, and Power BI to identify conversion gaps, response speed, customer
+segments, and the economic trade-offs between BOGO and discount incentives.
 
 ![Coffee Rewards Power BI dashboard](dashboard/assets/coffee-rewards-dashboard.png)
 
@@ -16,9 +16,9 @@ offer receipt, offer views, completions, and transactions.
 The project answers nine business questions across four themes:
 
 - Funnel performance and offer-type conversion
-- Channel reach and effectiveness
-- Customer response time and spending behavior
-- Demographic performance and reward cost
+- Channel reach and customer response time
+- Customer-segment performance and data coverage
+- Reward efficiency and modeled profitability thresholds
 
 ## Executive summary
 
@@ -38,31 +38,47 @@ The project answers nine business questions across four themes:
   **48 hours to complete** an offer.
 - Discount offers account for **53.3% of completions but only 31.1% of reward
   cost**; BOGO accounts for 46.7% of completions and 68.9% of cost.
+- Discount is approximately **2.5x more cost-efficient per completion** than
+  BOGO based on stated reward value.
 - A customer-and-time fixed-effects model estimates **$3.55 in sales per $1 of
   discount reward**, versus $1.26 for BOGO, after using informational offers as
   a behavioral benchmark. This is directional evidence, not causal ROI.
 
 ## Dashboard walkthrough
 
-The report contains four pages: an executive dashboard, funnel analysis,
-customer effectiveness analysis, and an interactive data-exploration page.
+The final report contains four decision-oriented pages:
+
+1. **Executive Summary** - business KPIs, the conversion funnel, reward-cost
+   efficiency, and a visible recommendation.
+2. **Funnel & Response** - funnel volume, offer and channel rates, and median
+   response time by offer type.
+3. **Customer Segments** - completion by age, income, and gender, plus the
+   cohort with missing demographic data.
+4. **Offer Economics** - reward cost, modeled sales per reward dollar,
+   break-even margins, and gross-margin sensitivity.
+
+[Download the final Power BI report as PDF](output/pdf/coffee-rewards-offer-performance.pdf).
 
 ![Coffee Rewards Power BI report walkthrough](dashboard/assets/coffee-rewards-dashboard-demo.gif)
 
 <details>
 <summary>View the individual report pages</summary>
 
-### Funnel Analysis
+### Executive Summary
 
-![Funnel Analysis](dashboard/assets/funnel-analysis.png)
+![Executive Summary](dashboard/assets/executive-summary.png)
 
-### Effectiveness Analysis
+### Funnel & Response
 
-![Effectiveness Analysis](dashboard/assets/effectiveness-analysis.png)
+![Funnel and Response](dashboard/assets/funnel-response.png)
 
-### Data Exploration
+### Customer Segments
 
-![Data Exploration](dashboard/assets/data-exploration.png)
+![Customer Segments](dashboard/assets/customer-segments.png)
+
+### Offer Economics
+
+![Offer Economics](dashboard/assets/offer-economics.png)
 
 </details>
 
@@ -128,7 +144,7 @@ BOGO does not cover its stated reward cost until approximately 79%.
 ```text
 coffee-rewards-offers/
 ├── dashboard/
-│   ├── assets/                  # Dashboard PNGs and report walkthrough GIF
+│   ├── assets/                  # Final page PNGs and report walkthrough GIF
 │   └── charts.md                # Power BI visual specification
 ├── data/
 │   ├── raw/                     # Original source files
@@ -141,6 +157,7 @@ coffee-rewards-offers/
 │   ├── 04_powerbi_export.py
 │   └── 05_incrementality_analysis.py
 ├── sql/                         # Funnel and channel SQL queries
+├── output/pdf/                  # Final exported Power BI report
 ├── requirements.txt
 └── README.md
 ```
@@ -165,10 +182,13 @@ python3 notebooks/05_incrementality_analysis.py
 
 The generated files are written to `data/export/`. Import them into Power BI
 using the visual mapping documented in [`dashboard/charts.md`](dashboard/charts.md).
+The published portfolio report uses imported static data and an embedded
+`AdditionalMetrics` table; it does not depend on a scheduled external data
+connection.
 
 ## Tools
 
-- **Power BI** - dashboard design and interactive exploration
+- **Power BI** - semantic model, report design, and portfolio presentation
 - **Python / Pandas / NumPy** - cleaning, behavioral analysis, and exports
 - **SQL / SQLite** - funnel, offer-type, and channel metrics
 - **Jupyter Notebook** - reproducible exploratory analysis
