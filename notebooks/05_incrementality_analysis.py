@@ -344,6 +344,32 @@ def export_powerbi_long(
     response_timing, reward_efficiency, fixed_effects, margin_sensitivity
 ):
     """Export the new metrics in the report's generic five-column schema."""
+    received_count = int((events["event"] == REC).sum())
+    completed_count = int((events["event"] == COMP).sum())
+    median_completion_h = float(
+        response_timing.query("offer_type == 'overall' and metric == 'complete'")[
+            "median_h"
+        ].iloc[0]
+    )
+    total_reward_usd = float(reward_efficiency["total_reward_usd"].sum())
+    executive = pd.DataFrame(
+        {
+            "dataset": ["executive_kpis"] * 3,
+            "dimension": ["overall"] * 3,
+            "category": ["all"] * 3,
+            "measure": [
+                "completion_rate_pct",
+                "median_time_to_complete_h",
+                "total_reward_usd",
+            ],
+            "value": [
+                round(100 * completed_count / received_count, 2),
+                median_completion_h,
+                total_reward_usd,
+            ],
+        }
+    )
+
     timing = response_timing[
         response_timing["offer_type"].isin(["bogo", "discount", "informational"])
         & response_timing["metric"].isin(["view", "complete"])
@@ -390,7 +416,9 @@ def export_powerbi_long(
     margin["dataset"] = "margin_sensitivity"
     margin["dimension"] = "gross_margin_pct"
 
-    output = pd.concat([timing, reward, modeled, margin], ignore_index=True)
+    output = pd.concat(
+        [executive, timing, reward, modeled, margin], ignore_index=True
+    )
     output = output[["dataset", "dimension", "category", "measure", "value"]]
     output.to_csv(EXPORT / "powerbi_additional_metrics.csv", index=False)
     return output

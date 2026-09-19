@@ -1,4 +1,7 @@
 dataset,dimension,category,measure,value
+executive_kpis,overall,all,completion_rate_pct,44.02
+executive_kpis,overall,all,median_time_to_complete_h,48.0
+executive_kpis,overall,all,total_reward_usd,164676.0
 response_timing,offer_type,bogo,median_time_to_view_h,12.0
 response_timing,offer_type,bogo,median_time_to_complete_h,42.0
 response_timing,offer_type,discount,median_time_to_view_h,12.0
