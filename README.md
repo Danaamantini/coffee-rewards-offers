@@ -5,8 +5,6 @@ receive, view, and complete promotional offers. The analysis combines Python,
 SQL, and Power BI to identify conversion gaps, response speed, customer
 segments, and the economic trade-offs between BOGO and discount incentives.
 
-![Coffee Rewards Power BI dashboard](dashboard/assets/coffee-rewards-dashboard.png)
-
 ## Project overview
 
 The dataset simulates 30 days of customer activity for a rewards program. It
@@ -59,28 +57,46 @@ The final report contains four decision-oriented pages:
 
 [Download the final Power BI report as PDF](output/pdf/coffee-rewards-offer-performance.pdf).
 
-![Coffee Rewards Power BI report walkthrough](dashboard/assets/coffee-rewards-dashboard-demo.gif)
-
-<details>
-<summary>View the individual report pages</summary>
-
 ### Executive Summary
+
+**Business question:** Is the offer program converting efficiently, responding
+quickly, and allocating reward cost to the right incentive?
+
+**Key takeaway:** Discount offers generate 53% of completions with only 31% of
+reward cost, making them approximately 2.5x more cost-efficient than BOGO.
 
 ![Executive Summary](dashboard/assets/executive-summary.png)
 
 ### Funnel & Response
 
+**Business question:** Where does conversion decline, and how do offer type and
+channel affect engagement and response time?
+
+**Key takeaway:** Discount converts more often, BOGO completes faster, social
+maximizes visibility, and web has the strongest completion rate.
+
 ![Funnel and Response](dashboard/assets/funnel-response.png)
 
 ### Customer Segments
+
+**Business question:** Which customer groups respond most strongly, and does
+missing demographic data identify a materially different cohort?
+
+**Key takeaway:** Completion increases with age and income. Customers without
+demographic data view offers frequently but complete far less often.
 
 ![Customer Segments](dashboard/assets/customer-segments.png)
 
 ### Offer Economics
 
-![Offer Economics](dashboard/assets/offer-economics.png)
+**Business question:** Which incentive offers the strongest modeled economics,
+and what margin would be required to cover its reward cost?
 
-</details>
+**Key takeaway:** Discount has the lower cost per received offer, higher modeled
+sales per reward dollar, and a much lower break-even margin than BOGO. These are
+directional estimates rather than causal ROI.
+
+![Offer Economics](dashboard/assets/offer-economics.png)
 
 ## Business questions and findings
 
@@ -144,7 +160,7 @@ BOGO does not cover its stated reward cost until approximately 79%.
 ```text
 coffee-rewards-offers/
 ├── dashboard/
-│   ├── assets/                  # Final page PNGs and report walkthrough GIF
+│   ├── assets/                  # Final page PNGs and portfolio cover image
 │   └── charts.md                # Power BI visual specification
 ├── data/
 │   ├── raw/                     # Original source files

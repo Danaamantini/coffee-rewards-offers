@@ -17,14 +17,11 @@ than exploratory worksheets.
 
 ## Portfolio assets
 
-- `assets/coffee-rewards-dashboard.png` - stable cover image used by the root
-  README.
+- `assets/coffee-rewards-dashboard.png` - standalone portfolio cover export.
 - `assets/executive-summary.png` - full-resolution Executive Summary.
 - `assets/funnel-response.png` - full-resolution Funnel & Response page.
 - `assets/customer-segments.png` - full-resolution Customer Segments page.
 - `assets/offer-economics.png` - full-resolution Offer Economics page.
-- `assets/coffee-rewards-dashboard-demo.gif` - animated walkthrough of the four
-  final pages.
 - `charts.md` - field mapping, analytical purpose, and interpretation notes.
 
 The final exported report is stored at
