@@ -5,6 +5,11 @@ receive, view, and complete promotional offers. The analysis combines Python,
 SQL, and Power BI to identify conversion gaps, response speed, customer
 segments, and the economic trade-offs between BOGO and discount incentives.
 
+![Coffee Rewards Executive Summary dashboard](dashboard/assets/coffee-rewards-dashboard.png)
+
+The executive view leads with the program's core decision: discount offers
+produce more completions with a substantially smaller share of reward cost.
+
 ## Project overview
 
 The dataset simulates 30 days of customer activity for a rewards program. It
@@ -57,15 +62,9 @@ The final report contains four decision-oriented pages:
 
 [Download the final Power BI report as PDF](output/pdf/coffee-rewards-offer-performance.pdf).
 
-### Executive Summary
-
-**Business question:** Is the offer program converting efficiently, responding
-quickly, and allocating reward cost to the right incentive?
-
-**Key takeaway:** Discount offers generate 53% of completions with only 31% of
-reward cost, making them approximately 2.5x more cost-efficient than BOGO.
-
-![Executive Summary](dashboard/assets/executive-summary.png)
+The Executive Summary is shown at the top of this page. The three supporting
+pages below provide the operational, customer, and economic evidence behind
+its recommendation.
 
 ### Funnel & Response
 
