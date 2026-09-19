@@ -358,9 +358,9 @@ def export_powerbi_long(
             "dimension": ["overall"] * 3,
             "category": ["all"] * 3,
             "measure": [
-                "completion_rate_pct",
-                "median_time_to_complete_h",
-                "total_reward_usd",
+                "Completion Rate",
+                "Median Time to Complete",
+                "Total Reward Cost",
             ],
             "value": [
                 round(100 * completed_count / received_count, 2),
@@ -374,7 +374,9 @@ def export_powerbi_long(
         response_timing["offer_type"].isin(["bogo", "discount", "informational"])
         & response_timing["metric"].isin(["view", "complete"])
     ].copy()
-    timing["measure"] = "median_time_to_" + timing["metric"] + "_h"
+    timing["measure"] = timing["metric"].map(
+        {"view": "Time to View", "complete": "Time to Complete"}
+    )
     timing = timing.rename(columns={"offer_type": "category", "median_h": "value"})
     timing["dataset"] = "response_timing"
     timing["dimension"] = "offer_type"
@@ -391,6 +393,14 @@ def export_powerbi_long(
         var_name="measure",
         value_name="value",
     ).rename(columns={"offer_type": "category"})
+    reward["measure"] = reward["measure"].map(
+        {
+            "completion_share_pct": "Completion Share",
+            "reward_cost_share_pct": "Reward Cost Share",
+            "reward_cost_per_received_usd": "Reward Cost per Received",
+            "total_reward_usd": "Total Reward Cost",
+        }
+    )
     reward["dataset"] = "reward_efficiency"
     reward["dimension"] = "offer_type"
 
@@ -406,12 +416,22 @@ def export_powerbi_long(
         var_name="measure",
         value_name="value",
     ).rename(columns={"offer_type": "category"})
+    modeled["measure"] = modeled["measure"].map(
+        {
+            "vs_informational_spend_change_per_day_usd": "Daily Spend Change vs Informational",
+            "vs_informational_tx_change_per_day": "Daily Transaction Change vs Informational",
+            "sales_per_reward_usd": "Sales per Reward Dollar",
+            "break_even_margin_pct": "Break-even Margin",
+        }
+    )
     modeled["dataset"] = "incrementality_model"
     modeled["dimension"] = "offer_type"
 
     margin = margin_sensitivity.copy()
     margin["category"] = margin["gross_margin_pct"].astype(str) + "%"
-    margin["measure"] = margin["offer_type"] + "_net_contribution_usd"
+    margin["measure"] = margin["offer_type"].map(
+        {"bogo": "BOGO Net Contribution", "discount": "Discount Net Contribution"}
+    )
     margin = margin.rename(columns={"modeled_net_contribution_usd": "value"})
     margin["dataset"] = "margin_sensitivity"
     margin["dimension"] = "gross_margin_pct"

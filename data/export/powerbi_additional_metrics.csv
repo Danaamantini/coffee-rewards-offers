@@ -1,41 +1,41 @@
 dataset,dimension,category,measure,value
-executive_kpis,overall,all,completion_rate_pct,44.02
-executive_kpis,overall,all,median_time_to_complete_h,48.0
-executive_kpis,overall,all,total_reward_usd,164676.0
-response_timing,offer_type,bogo,median_time_to_view_h,12.0
-response_timing,offer_type,bogo,median_time_to_complete_h,42.0
-response_timing,offer_type,discount,median_time_to_view_h,12.0
-response_timing,offer_type,discount,median_time_to_complete_h,60.0
-response_timing,offer_type,informational,median_time_to_view_h,18.0
-reward_efficiency,offer_type,bogo,completion_share_pct,46.66
-reward_efficiency,offer_type,discount,completion_share_pct,53.34
-reward_efficiency,offer_type,informational,completion_share_pct,0.0
-reward_efficiency,offer_type,bogo,reward_cost_share_pct,68.89
-reward_efficiency,offer_type,discount,reward_cost_share_pct,31.11
-reward_efficiency,offer_type,informational,reward_cost_share_pct,0.0
-reward_efficiency,offer_type,bogo,reward_cost_per_received_usd,3.72
-reward_efficiency,offer_type,discount,reward_cost_per_received_usd,1.68
-reward_efficiency,offer_type,informational,reward_cost_per_received_usd,0.0
-reward_efficiency,offer_type,bogo,total_reward_usd,113440.0
-reward_efficiency,offer_type,discount,total_reward_usd,51236.0
-reward_efficiency,offer_type,informational,total_reward_usd,0.0
-incrementality_model,offer_type,bogo,vs_informational_spend_change_per_day_usd,0.82
-incrementality_model,offer_type,discount,vs_informational_spend_change_per_day_usd,0.84
-incrementality_model,offer_type,bogo,vs_informational_tx_change_per_day,0.064
-incrementality_model,offer_type,discount,vs_informational_tx_change_per_day,0.049
-incrementality_model,offer_type,bogo,sales_per_reward_usd,1.26
-incrementality_model,offer_type,discount,sales_per_reward_usd,3.55
-incrementality_model,offer_type,bogo,break_even_margin_pct,79.28
-incrementality_model,offer_type,discount,break_even_margin_pct,28.14
-margin_sensitivity,gross_margin_pct,20%,bogo_net_contribution_usd,-84822.94
-margin_sensitivity,gross_margin_pct,30%,bogo_net_contribution_usd,-70514.41
-margin_sensitivity,gross_margin_pct,40%,bogo_net_contribution_usd,-56205.88
-margin_sensitivity,gross_margin_pct,50%,bogo_net_contribution_usd,-41897.35
-margin_sensitivity,gross_margin_pct,60%,bogo_net_contribution_usd,-27588.81
-margin_sensitivity,gross_margin_pct,80%,bogo_net_contribution_usd,1028.25
-margin_sensitivity,gross_margin_pct,20%,discount_net_contribution_usd,-14824.71
-margin_sensitivity,gross_margin_pct,30%,discount_net_contribution_usd,3380.94
-margin_sensitivity,gross_margin_pct,40%,discount_net_contribution_usd,21586.59
-margin_sensitivity,gross_margin_pct,50%,discount_net_contribution_usd,39792.24
-margin_sensitivity,gross_margin_pct,60%,discount_net_contribution_usd,57997.88
-margin_sensitivity,gross_margin_pct,80%,discount_net_contribution_usd,94409.18
+executive_kpis,overall,all,Completion Rate,44.02
+executive_kpis,overall,all,Median Time to Complete,48.0
+executive_kpis,overall,all,Total Reward Cost,164676.0
+response_timing,offer_type,bogo,Time to View,12.0
+response_timing,offer_type,bogo,Time to Complete,42.0
+response_timing,offer_type,discount,Time to View,12.0
+response_timing,offer_type,discount,Time to Complete,60.0
+response_timing,offer_type,informational,Time to View,18.0
+reward_efficiency,offer_type,bogo,Completion Share,46.66
+reward_efficiency,offer_type,discount,Completion Share,53.34
+reward_efficiency,offer_type,informational,Completion Share,0.0
+reward_efficiency,offer_type,bogo,Reward Cost Share,68.89
+reward_efficiency,offer_type,discount,Reward Cost Share,31.11
+reward_efficiency,offer_type,informational,Reward Cost Share,0.0
+reward_efficiency,offer_type,bogo,Reward Cost per Received,3.72
+reward_efficiency,offer_type,discount,Reward Cost per Received,1.68
+reward_efficiency,offer_type,informational,Reward Cost per Received,0.0
+reward_efficiency,offer_type,bogo,Total Reward Cost,113440.0
+reward_efficiency,offer_type,discount,Total Reward Cost,51236.0
+reward_efficiency,offer_type,informational,Total Reward Cost,0.0
+incrementality_model,offer_type,bogo,Daily Spend Change vs Informational,0.82
+incrementality_model,offer_type,discount,Daily Spend Change vs Informational,0.84
+incrementality_model,offer_type,bogo,Daily Transaction Change vs Informational,0.064
+incrementality_model,offer_type,discount,Daily Transaction Change vs Informational,0.049
+incrementality_model,offer_type,bogo,Sales per Reward Dollar,1.26
+incrementality_model,offer_type,discount,Sales per Reward Dollar,3.55
+incrementality_model,offer_type,bogo,Break-even Margin,79.28
+incrementality_model,offer_type,discount,Break-even Margin,28.14
+margin_sensitivity,gross_margin_pct,20%,BOGO Net Contribution,-84822.94
+margin_sensitivity,gross_margin_pct,30%,BOGO Net Contribution,-70514.41
+margin_sensitivity,gross_margin_pct,40%,BOGO Net Contribution,-56205.88
+margin_sensitivity,gross_margin_pct,50%,BOGO Net Contribution,-41897.35
+margin_sensitivity,gross_margin_pct,60%,BOGO Net Contribution,-27588.81
+margin_sensitivity,gross_margin_pct,80%,BOGO Net Contribution,1028.25
+margin_sensitivity,gross_margin_pct,20%,Discount Net Contribution,-14824.71
+margin_sensitivity,gross_margin_pct,30%,Discount Net Contribution,3380.94
+margin_sensitivity,gross_margin_pct,40%,Discount Net Contribution,21586.59
+margin_sensitivity,gross_margin_pct,50%,Discount Net Contribution,39792.24
+margin_sensitivity,gross_margin_pct,60%,Discount Net Contribution,57997.88
+margin_sensitivity,gross_margin_pct,80%,Discount Net Contribution,94409.18
